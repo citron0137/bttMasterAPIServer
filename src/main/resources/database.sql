@@ -1,0 +1,7 @@
+CREATE DATABASE btt;
+USE btt;
+CREATE TABLE board(
+    seq INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    site_seq INT(11),
+    board_link VARCHAR(500) NOT NULL
+);
