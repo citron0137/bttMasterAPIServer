@@ -7,7 +7,5 @@ public class Reassem_sub_file {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int seq;
-
     private String site_link;
-
 }
