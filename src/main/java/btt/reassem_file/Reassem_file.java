@@ -78,34 +78,12 @@ public class Reassem_file {
 
     @Override
     public String toString() {
-        String stateString;
-        if(state == 0){
-            stateString ="none";
-        }
-        else if(state == 1){
-            stateString="analyzing";
-        }
-        else if(state == 2){
-            stateString="hit";
-        }
-        else if(state == 3){
-            stateString="miss";
-        }
-        else{
-            stateString ="error";
-        }
-        try {
-            InetAddress address = InetAddress.getByAddress(ip.toByteArray());
         return "Reassem_file{" +
                 "seq=" + seq +
                 ", uri='" + uri + '\'' +
-                ", ip='" + address.getAddress() + '\'' +
+                ", ip='" + ip + '\'' +
                 ", reassem_date=" + reassem_date +
-                ", state= '" + stateString + '\'' +
+                ", state= '" + state + '\'' +
                 '}';
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
