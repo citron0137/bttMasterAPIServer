@@ -1,5 +1,7 @@
 package btt.reassem_file;
 
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.net.Inet4Address;
@@ -15,6 +17,8 @@ public class Reassem_file {
 
     private String uri;
     private BigInteger ip;
+    
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime reassem_date;
     private int state;
 
