@@ -1,9 +1,9 @@
-package btt.site;
+package btt.reassem_file;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SitedRespository extends JpaRepository<Site,Integer> {
+public interface Reassem_fileRespository extends JpaRepository<Reassem_file,Integer> {
 
 }

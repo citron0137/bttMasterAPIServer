@@ -1,0 +1,56 @@
+package btt.reassem_file;
+
+import com.sun.tools.internal.ws.processor.generator.CustomExceptionGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@Transactional
+public class Reassem_fileController {
+    @Autowired
+    Reassem_fileRespository reassem_fileRespository;
+
+    @GetMapping("/reassem_file")
+    public List<Reassem_file> index(){
+        return reassem_fileRespository.findAll();
+    }
+
+    @GetMapping("/reassem_file/{seq}")
+    public Reassem_file show(@PathVariable String seq){
+        int reassem_fileSeq = Integer.parseInt(seq);
+        return reassem_fileRespository.findOne(reassem_fileSeq);
+    }
+
+    @PostMapping("/reassem_file")
+    @Transactional
+    public Reassem_file create(@RequestBody Map<String, String> body) {
+        try {
+            String uri = body.get("uri");
+            BigInteger ip = new BigInteger(InetAddress.getByName(body.get("ip")).getAddress());
+            LocalDateTime reassem_date = LocalDateTime.parse(body.get("ressem_date"));
+            String stateString = body.get("state");
+            int state = -1;
+            if(stateString.equalsIgnoreCase("none"))  state = 0;
+            else if(stateString.equalsIgnoreCase("analyzing")) state = 1;
+            else if(stateString.equalsIgnoreCase("hit")) state = 2;
+            else if(stateString.equalsIgnoreCase("miss")) state = 3;
+            else{
+                return null;
+            }
+            return reassem_fileRespository.save(new Reassem_file(uri,ip,reassem_date,state));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+}

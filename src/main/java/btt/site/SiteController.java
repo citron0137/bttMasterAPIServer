@@ -10,7 +10,7 @@ import java.util.List;
 @Transactional
 public class SiteController {
     @Autowired
-    SitedRespository siteRespository;
+    SiteRespository siteRespository;
 
     @GetMapping("/site")
     public List<Site> index(){
