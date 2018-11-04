@@ -55,17 +55,34 @@ public class Original_img {
 	this.img_path = img_path;
     }
 
+    public String getImg_path() {
+        return img_path;
+    }
 
+    public String getImg_hash() {
+        return img_hash;
+    }
+
+    public void setImg_hash(String img_hash) {
+        this.img_hash = img_hash;
+    }
+
+    public String getCompare_hash() {
+        return compare_hash;
+    }
+
+    public void setCompare_hash(String compare_hash) {
+        this.compare_hash = compare_hash;
+    }
 
     @Override
     public String toString() {
-        return "Post{" +
+        return "Original_img{" +
                 "seq=" + seq +
-                ", board_seq=" + board_seq +
-                ", post_date=" + post_date +
-                ", post_link='" + post_link + '\'' +
-                ", post_name='" + post_name + '\'' +
-                ", user_id='" + user_id + '\'' +
+                ", original_movie_seq=" + original_movie_seq +
+                ", img_path='" + img_path + '\'' +
+                ", img_hash='" + img_hash + '\'' +
+                ", compare_hash='" + compare_hash + '\'' +
                 '}';
     }
 }

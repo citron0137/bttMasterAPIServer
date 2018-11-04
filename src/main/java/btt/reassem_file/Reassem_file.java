@@ -17,7 +17,7 @@ public class Reassem_file {
 
     private String uri;
     private BigInteger ip;
-    
+
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime reassem_date;
     private int state;

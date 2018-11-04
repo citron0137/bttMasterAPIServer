@@ -1,4 +1,4 @@
-package btt.post;
+package btt.original_img;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,38 +9,38 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class PostController {
+public class Original_imgController {
     @Autowired
-    PostRespository postRespository;
+    Original_imgRespository original_imgRespository;
 
-    @GetMapping("/post")
-    public List<Post> index(){
-        return postRespository.findAll();
+    @GetMapping("/original_img")
+    public List<Original_img> index(){
+        return original_imgRespository.findAll();
     }
 
-    @GetMapping("/post/{seq}")
-    public Post show(@PathVariable String seq){
-        int postSeq = Integer.parseInt(seq);
-        return postRespository.findOne(postSeq);
+    @GetMapping("/original_img/{seq}")
+    public Original_img show(@PathVariable String seq){
+        int original_imgSeq = Integer.parseInt(seq);
+        return original_imgRespository.findOne(original_imgSeq);
     }
 
 
-    @PostMapping("/post")
+    @PostMapping("/original_img")
     @Transactional
-    public Post create(@RequestBody Map<String, String> body){
-        int board_seq =Integer.parseInt(body.get("board_seq"));
-        LocalDateTime post_date = LocalDateTime.parse(body.get("post_date"));
-        String post_link = body.get("post_link");
-        String post_name = body.get("post_name");
-        String user_id = body.get("user_id");
-        return postRespository.save(new Post(board_seq,post_date,post_link,post_name,user_id));
+    public Original_img create(@RequestBody Map<String, String> body){
+        int original_movie_seq =Integer.parseInt(body.get("original_movie_seq"));
+        String img_path = body.get("img_path");
+        String img_hash = body.get("img_hash");
+        String compare_hash = body.get("compare_hash");
+
+        return original_imgRespository.save(new Original_img(original_movie_seq,img_path,img_hash,compare_hash));
     }
 
-    @DeleteMapping("/post/{seq}")
+    @DeleteMapping("/original_img/{seq}")
     @Transactional
     public boolean delete(@PathVariable String seq){
-        int postSeq = Integer.parseInt(seq);
-        postRespository.delete(postSeq);
+        int original_imgSeq = Integer.parseInt(seq);
+        original_imgRespository.delete(original_imgSeq);
         return true;
     }
 }
