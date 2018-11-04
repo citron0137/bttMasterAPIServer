@@ -1,4 +1,4 @@
-package btt.Detect_hit;
+package btt.detect_hit;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
