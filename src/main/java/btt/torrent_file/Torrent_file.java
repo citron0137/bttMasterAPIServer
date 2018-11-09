@@ -36,7 +36,63 @@ public class Torrent_file {
 	this.state = state;
     }
 
-    
+    public int getSeq() {
+        return seq;
+    }
 
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
 
+    public int getPost_seq() {
+        return post_seq;
+    }
+
+    public void setPost_seq(int post_seq) {
+        this.post_seq = post_seq;
+    }
+
+    public String getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(String magnet) {
+        this.magnet = magnet;
+    }
+
+    public String getInfohash() {
+        return infohash;
+    }
+
+    public void setInfohash(String infohash) {
+        this.infohash = infohash;
+    }
+
+    public String getFile_size() {
+        return file_size;
+    }
+
+    public void setFile_size(String file_size) {
+        this.file_size = file_size;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Torrent_file{" +
+                "seq=" + seq +
+                ", post_seq=" + post_seq +
+                ", magnet='" + magnet + '\'' +
+                ", infohash='" + infohash + '\'' +
+                ", file_size='" + file_size + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

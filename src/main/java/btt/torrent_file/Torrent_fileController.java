@@ -24,11 +24,23 @@ public class Torrent_fileController {
         return torrent_fileRespository.findOne(torrent_fileSeq);
     }
 
-
     @PostMapping("/torrent_file")
     @Transactional
-    public Torrent_file create(@RequestBody Map<String, String> body){	
-    	return null;
+    public Torrent_file create(@RequestBody Map<String, String> body){
+        int post_seq = Integer.parseInt(body.get("post_seq"));
+        String magnet = body.get("magenet");
+        String infohash = body.get("infohash");
+        String file_size = body.get("file_size");
+        int state = Integer.parseInt(body.get("state"));
+        return torrent_fileRespository.save(new Torrent_file(post_seq,magnet,infohash,file_size,state));
+    }
+
+    @DeleteMapping("/torrent_file/{seq}")
+    @Transactional
+    public boolean delete(@PathVariable String seq){
+        int torrent_fileSeq = Integer.parseInt(seq);
+        torrent_fileRespository.delete(torrent_fileSeq);
+        return true;
     }
 }
 

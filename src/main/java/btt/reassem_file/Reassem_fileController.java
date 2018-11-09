@@ -34,15 +34,7 @@ public class Reassem_fileController {
             String uri = body.get("uri");
             BigInteger ip = new BigInteger(InetAddress.getByName(body.get("ip")).getAddress());
             LocalDateTime reassem_date = LocalDateTime.parse(body.get("ressem_date"));
-            String stateString = body.get("state");
-            int state = -1;
-            if(stateString.equalsIgnoreCase("none"))  state = 0;
-            else if(stateString.equalsIgnoreCase("analyzing")) state = 1;
-            else if(stateString.equalsIgnoreCase("hit")) state = 2;
-            else if(stateString.equalsIgnoreCase("miss")) state = 3;
-            else{
-                return null;
-            }
+            int state = Integer.parseInt(body.get("state"));
             return reassem_fileRespository.save(new Reassem_file(uri,ip,reassem_date,state));
         } catch (Exception e) {
             e.printStackTrace();
