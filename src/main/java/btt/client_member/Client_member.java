@@ -49,7 +49,7 @@ public class Client_member {
 	return this.tel;
     }
 
-    public void setTel(Stirng tel) {
+    public void setTel(String tel) {
 	this.tel = tel;
     }
 

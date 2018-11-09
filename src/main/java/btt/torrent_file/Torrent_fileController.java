@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Transactional
 public class Torrent_fileController {
     @Autowired
     Torrent_fileRespository torrent_fileRespository;
@@ -26,8 +27,8 @@ public class Torrent_fileController {
 
     @PostMapping("/torrent_file")
     @Transactional
-    public Torrent_file create(@RequestBody Map<String, String> body){
-
-        return null;
+    public Torrent_file create(@RequestBody Map<String, String> body){	
+    	return null;
     }
 }
+

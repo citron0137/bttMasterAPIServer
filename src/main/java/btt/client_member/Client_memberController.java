@@ -38,7 +38,7 @@ public class Client_memberController {
     @Transactional
     public boolean delete(@PathVariable String seq){
         int client_memberSeq = Integer.parseInt(seq);
-        Client_memberRespository.delete(client_memberSeq);
+        client_memberRespository.delete(client_memberSeq);
         return true;
     }
 }

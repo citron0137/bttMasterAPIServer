@@ -34,7 +34,7 @@ public class Original_movieController {
         return original_movieRespository.save(new Original_movie(client_seq,original_name,original_date));
     }
 
-    @DeleteMapping("/original_img/{seq}")
+    @DeleteMapping("/original_movie/{seq}")
     @Transactional
     public boolean delete(@PathVariable String seq){
         int original_movieSeq = Integer.parseInt(seq);
