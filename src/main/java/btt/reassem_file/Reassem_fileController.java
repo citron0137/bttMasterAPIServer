@@ -41,4 +41,12 @@ public class Reassem_fileController {
             return null;
         }
     }
+
+    @DeleteMapping("/reassem_file/{seq}")
+    public boolean delete(@PathVariable String seq){
+        int reassem_fileSeq = Integer.parseInt(seq);
+        reassem_fileRespository.delete(reassem_fileSeq);
+        return true;
+    }
 }
+
