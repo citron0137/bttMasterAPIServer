@@ -12,7 +12,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int seq;
 
-    @Column(name = "board_link")
     private int board_seq;
 
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
