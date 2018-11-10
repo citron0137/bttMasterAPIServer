@@ -44,7 +44,6 @@ public class Board {
     }
 
 
-
     public String getBoard_link() {
         return board_link;
     }

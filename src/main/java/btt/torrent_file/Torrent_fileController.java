@@ -35,6 +35,7 @@ public class Torrent_fileController {
         return torrent_fileRespository.save(new Torrent_file(post_seq,magnet,infohash,file_size,state));
     }
 
+
     @DeleteMapping("/torrent_file/{seq}")
     @Transactional
     public boolean delete(@PathVariable String seq){
@@ -43,4 +44,3 @@ public class Torrent_fileController {
         return true;
     }
 }
-

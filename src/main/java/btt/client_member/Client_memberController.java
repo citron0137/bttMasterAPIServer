@@ -12,7 +12,7 @@ import java.util.Map;
 public class Client_memberController {
     
     @Autowired
-    Client_memberRespository client_memberRespository;
+    private Client_memberRespository client_memberRespository;
 
     @GetMapping("/client_member")
     public List<Client_member> index(){
