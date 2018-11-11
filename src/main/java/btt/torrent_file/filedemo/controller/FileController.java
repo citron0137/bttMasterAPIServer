@@ -33,6 +33,7 @@ public class FileController {
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/torrent_file/downloadFile/")
+
                 .path(fileName)
                 .toUriString();
 
