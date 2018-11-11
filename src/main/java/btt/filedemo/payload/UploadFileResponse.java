@@ -1,4 +1,4 @@
-package btt.torrent_file.filedemo.payload;
+package btt.filedemo.payload;
 
 
 public class UploadFileResponse {

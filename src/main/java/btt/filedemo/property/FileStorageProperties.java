@@ -1,4 +1,4 @@
-package btt.torrent_file.filedemo.property;
+package btt.filedemo.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

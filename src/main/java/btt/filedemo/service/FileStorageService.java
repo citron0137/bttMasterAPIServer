@@ -1,8 +1,7 @@
-package btt.torrent_file.filedemo.service;
+package btt.filedemo.service;
 
-import btt.torrent_file.filedemo.exception.FileStorageException;
-import btt.torrent_file.filedemo.exception.MyFileNotFoundException;
-import btt.torrent_file.filedemo.property.FileStorageProperties;
+import btt.filedemo.exception.FileStorageException;
+import btt.filedemo.exception.MyFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,9 +20,21 @@ public class FileStorageService {
 
     private final Path fileStorageLocation;
 
+
+    public FileStorageService(String path) {
+        this.fileStorageLocation = Paths.get("/var/www/html/" + path + "/")
+                .toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
+    }
+
     @Autowired
     public FileStorageService() {
-        this.fileStorageLocation = Paths.get("/var/www/html/torrents/")
+        this.fileStorageLocation = Paths.get("/var/www/html/torrent//")
                 .toAbsolutePath().normalize();
 
         try {

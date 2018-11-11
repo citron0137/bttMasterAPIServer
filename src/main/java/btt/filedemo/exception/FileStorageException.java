@@ -1,4 +1,4 @@
-package btt.torrent_file.filedemo.exception;
+package btt.filedemo.exception;
 
 public class FileStorageException extends RuntimeException {
     public FileStorageException(String message) {

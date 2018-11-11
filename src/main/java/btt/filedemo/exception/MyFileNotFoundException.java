@@ -1,4 +1,4 @@
-package btt.torrent_file.filedemo.exception;
+package btt.filedemo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
