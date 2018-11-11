@@ -1,6 +1,7 @@
 package btt.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -23,6 +24,13 @@ public class BoardController {
         return boardRespository.findOne(boardSeq);
     }
 
+    @GetMapping("/board/search")
+    public List<Board> search(@RequestParam(value = "search", required = false) String q){
+            return boardRespository.findByBoard_link(q);
+
+
+    }
+
     @PostMapping("/board")
     @Transactional
     public Board create(@RequestBody Map<String, String> body){
@@ -30,6 +38,8 @@ public class BoardController {
         String board_url = body.get("board_link");
         return boardRespository.save(new Board(site_seq,board_url));
     }
+
+
 
     @DeleteMapping("/board/{seq}")
     @Transactional
