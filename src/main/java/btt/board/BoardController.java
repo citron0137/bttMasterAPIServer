@@ -27,8 +27,6 @@ public class BoardController {
     @GetMapping("/board/search")
     public List<Board> search(@RequestParam(value = "search", required = false) String q){
             return boardRespository.findByBoard_link(q);
-
-
     }
 
     @PostMapping("/board")
