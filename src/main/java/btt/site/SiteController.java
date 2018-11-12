@@ -23,6 +23,10 @@ public class SiteController {
         int siteSeq = Integer.parseInt(seq);
         return siteRespository.findOne(siteSeq);
     }
+    @GetMapping("/board/search")
+    public List<Site> search(@RequestParam(value="site_link",defaultValue="false")String site_link){
+        return siteRespository.findBySite_link(site_link);
+    }
     @PostMapping("/site")
     @Transactional
     public Site create(@RequestBody Map<String, String> body){
