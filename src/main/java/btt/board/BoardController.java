@@ -25,8 +25,9 @@ public class BoardController {
     }
 
     @GetMapping("/board/search")
-    public Optional<Board> search(@RequestParam(value = "search", required = false) String q){
-            return boardRespository.findByBoard_link(q);
+    public List<Board> search(){
+        String q = "http://www.tfreeca22.com/board.php?mode=list&b_id=tmovie";
+	return boardRespository.findByBoard_link(q);
     }
 
     @PostMapping("/board")
