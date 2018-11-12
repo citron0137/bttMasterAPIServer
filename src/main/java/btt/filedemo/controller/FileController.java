@@ -67,7 +67,7 @@ public class FileController {
         String fileName = post_imgFileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/torrent_file/downloadFile/")
+                .path("/post_img/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
