@@ -25,9 +25,9 @@ public class BoardController {
     }
 
     @GetMapping("/board/search")
-    public List<Board> search(){
-        String q = "http://www.tfreeca22.com/board.php?mode=list&b_id=tmovie";
-	return boardRespository.findByBoard_link(q);
+    public List<Board> search(@RequestParam(value="board_link",defaultValue="false")String board_link){
+        System.out.println("board_link : '" + board_link+'\'');
+	return boardRespository.findByBoard_link(board_link);
     }
 
     @PostMapping("/board")

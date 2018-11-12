@@ -11,5 +11,5 @@ import java.util.List;
 public interface BoardRespository extends JpaRepository<Board,Integer> {
 
     @Query("select b from Board b where b.board_link = :board_link")
-    public List<Board> findByBoard_link(String board_link);
+    public List<Board> findByBoard_link(@Param("board_link")String board_link);
 }
