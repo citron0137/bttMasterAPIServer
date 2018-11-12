@@ -1,12 +1,12 @@
 package btt.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class BoardController {
@@ -25,7 +25,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/search")
-    public List<Board> search(@RequestParam(value = "search", required = false) String q){
+    public Optional<Board> search(@RequestParam(value = "search", required = false) String q){
             return boardRespository.findByBoard_link(q);
     }
 
