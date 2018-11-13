@@ -37,8 +37,6 @@ public class BoardController {
         return boardRespository.save(new Board(site_seq,board_url));
     }
 
-
-
     @DeleteMapping("/board/{seq}")
     @Transactional
     public boolean delete(@PathVariable String seq){

@@ -31,8 +31,46 @@ public class Sub_img {
         this.img_hash = img_hash;
         this.compare_hash = compare_hash;
     }
-    
-    //TODO getter /setter generate
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+    public int getSub_file_seq() {
+        return sub_file_seq;
+    }
+
+    public void setSub_file_seq(int sub_file_seq) {
+        this.sub_file_seq = sub_file_seq;
+    }
+
+    public String getImg_path() {
+        return img_path;
+    }
+
+    public void setImg_path(String img_path) {
+        this.img_path = img_path;
+    }
+
+    public String getImg_hash() {
+        return img_hash;
+    }
+
+    public void setImg_hash(String img_hash) {
+        this.img_hash = img_hash;
+    }
+
+    public String getCompare_hash() {
+        return compare_hash;
+    }
+
+    public void setCompare_hash(String compare_hash) {
+        this.compare_hash = compare_hash;
+    }
 
     @Override
     public String toString() {
