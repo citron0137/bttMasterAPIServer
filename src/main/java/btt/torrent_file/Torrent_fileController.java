@@ -1,6 +1,7 @@
 package btt.torrent_file;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -33,6 +34,19 @@ public class Torrent_fileController {
         String file_size = body.get("file_size");
         int state = Integer.parseInt(body.get("state"));
         return torrent_fileRespository.save(new Torrent_file(post_seq,magnet,infohash,file_size,state));
+    }
+
+    @PatchMapping("/torrent_file/{seq}")
+    public Torrent_file update(@PathVariable final int seq,
+                                               @RequestBody Map<String, String> body){
+        final Torrent_file fetchedTorrentFile = torrent_fileRespository.findOne(seq);
+        if(fetchedTorrentFile == null) return fetchedTorrentFile;
+        if(body.get("state") != null){
+            int state = Integer.parseInt(body.get("state"));
+            fetchedTorrentFile.setSeq(state);
+        }
+        return torrent_fileRespository.save(fetchedTorrentFile);
+
     }
 
 
