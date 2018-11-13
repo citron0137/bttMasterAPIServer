@@ -62,12 +62,12 @@ public class FileController {
     }
 
 
-    @PostMapping("/post_img/uploadFile")
+    @PostMapping("/sub_img/uploadFile")
     public UploadFileResponse uploadPost_imgFile(@RequestParam("file") MultipartFile file) {
         String fileName = post_imgFileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/post_img/downloadFile/")
+                .path("/sub_img/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
@@ -75,7 +75,7 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
-    @GetMapping("/post_img/downloadFile/{fileName:.+}")
+    @GetMapping("/sub_img/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadPost_imgFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = post_imgFileStorageService.loadFileAsResource(fileName);
