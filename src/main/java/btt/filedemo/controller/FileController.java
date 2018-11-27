@@ -23,6 +23,7 @@ public class FileController {
 
     private FileStorageService torrentFileStorageService = new FileStorageService("torrent");
     private FileStorageService post_imgFileStorageService = new FileStorageService("post_img");
+    private FileStorageService hashFileStorageService = new FileStorageService("hash_file");
 
     @PostMapping("/torrent_file/uploadFile")
     public UploadFileResponse uploadTorrentFile(@RequestParam("file") MultipartFile file) {
@@ -62,12 +63,12 @@ public class FileController {
     }
 
 
-    @PostMapping("/sub_img/uploadFile")
+    @PostMapping("/post_img/uploadFile")
     public UploadFileResponse uploadPost_imgFile(@RequestParam("file") MultipartFile file) {
         String fileName = post_imgFileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/sub_img/downloadFile/")
+                .path("/post_img/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
@@ -75,7 +76,7 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
-    @GetMapping("/sub_img/downloadFile/{fileName:.+}")
+    @GetMapping("/post_img/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadPost_imgFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = post_imgFileStorageService.loadFileAsResource(fileName);
@@ -98,6 +99,46 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+
+
+    @PostMapping("/hash_file/uploadFile")
+    public UploadFileResponse uploadHashFile(@RequestParam("file") MultipartFile file) {
+        String fileName = hashFileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/hash_file/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+    @GetMapping("/hash_file/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadHashFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = hashFileStorageService.loadFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
 
 
 }
