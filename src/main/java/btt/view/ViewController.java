@@ -18,8 +18,11 @@ public class ViewController {
     }
 
     @PostMapping("/")
-    public String mainSubmit(@ModelAttribute Search search){
-	return "result";
+    public String mainSubmit(@RequestBody Map<String, String> body){
+        System.out.println("mang mang");
+	String keyword = body.get("keyword");
+	System.out.println("keyword : "+ keyword);
+        return "result;
     }
 
 }
