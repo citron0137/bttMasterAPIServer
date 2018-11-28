@@ -9,7 +9,7 @@ var main = {
 		var data = {
 			keyword: $('#keyword').val()
 		};
-
+        $.post("/",JSON.stringify(data))
 		$.ajax({
 			type: 'POST',
 			url: '/',
