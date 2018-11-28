@@ -23,6 +23,12 @@ public class Detect_hitController {
         int detect_hitSeq = Integer.parseInt(seq);
         return detect_hitRespository.findOne(detect_hitSeq);
     }
+    
+    @GetMapping("/detect_hit/search")
+    public List<Detect_hit> search(@RequestParam(value="original_movie_seq",defaultValue="false")String original_movie_seq){
+	int oms = Integer.parseInt(original_movie_seq);    
+	return detect_hitRespository.findByOriginal_movie_seq(oms);
+    }
 
 
     @PostMapping("/detect_hit")

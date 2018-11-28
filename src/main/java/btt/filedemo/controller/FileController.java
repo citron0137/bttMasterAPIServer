@@ -24,7 +24,11 @@ public class FileController {
     private FileStorageService torrentFileStorageService = new FileStorageService("torrent");
     private FileStorageService post_imgFileStorageService = new FileStorageService("post_img");
     private FileStorageService hashFileStorageService = new FileStorageService("hash_file");
+    private FileStorageService matchFileStorageService = new FileStorageService("match_file");
 
+    private FileStorageService sub_imgFileStorageService = new FileStorageService("sub_img");
+    private FileStorageService original_imgFileStorageService = new FileStorageService("original_img");
+    
     @PostMapping("/torrent_file/uploadFile")
     public UploadFileResponse uploadTorrentFile(@RequestParam("file") MultipartFile file) {
         String fileName = torrentFileStorageService.storeFile(file);
@@ -139,6 +143,115 @@ public class FileController {
                 .body(resource);
     }
 
+	
+    @PostMapping("/match_file/uploadFile")
+    public UploadFileResponse uploadMatchFile(@RequestParam("file") MultipartFile file) {
+        String fileName = matchFileStorageService.storeFile(file);
 
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/match_file/downloadFile/")
+                .path(fileName)
+                .toUriString();
 
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+    @GetMapping("/match_file/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadMatchFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = matchFileStorageService.loadFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
+    @PostMapping("/original_img/uploadFile")
+    public UploadFileResponse uploadOriginal_imgFile(@RequestParam("file") MultipartFile file) {
+        String fileName = original_imgFileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/original_img/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+    @GetMapping("/original_img/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadOrigianl_imgFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = original_imgFileStorageService.loadFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
+    @PostMapping("/sub_img/uploadFile")
+    public UploadFileResponse uploadSub_imgFile(@RequestParam("file") MultipartFile file) {
+        String fileName = sub_imgFileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/sub_img/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+    @GetMapping("/sub_img/downloadFile/{fileName:.+}")
+    public ResponseEntity<Resource> downloadSub_imgFile(@PathVariable String fileName, HttpServletRequest request) {
+        // Load file as Resource
+        Resource resource = sub_imgFileStorageService.loadFileAsResource(fileName);
+
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 }

@@ -16,13 +16,13 @@ public class ViewController {
 	model.addAttribute("search", new Search());
         return "main";
     }
-
+/*
     @PostMapping("/")
     public String mainSubmit(@RequestBody Map<String, String> body){
         System.out.println("mang mang");
 	String keyword = body.get("keyword");
 	System.out.println("keyword : "+ keyword);
-        return "result;
+        return "result";
     }
-
+*/
 }
